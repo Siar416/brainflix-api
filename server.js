@@ -15,5 +15,5 @@ const SERVER_PORT = 8000;
 
 // app listening on port 8000
 app.listen(SERVER_PORT, () => {
-  console.log(`Server is listening on port ${SERVER_PORT}`);
+  console.log(`Server is listening on port: ${SERVER_PORT}`);
 });
