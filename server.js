@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
+const videosRoute = require("./routes/videos");
+
+//using routing by define endpoint
+app.use("/videos", videosRoute);
 
 //show morgan biolerplate
 app.use(morgan("tiny"));
