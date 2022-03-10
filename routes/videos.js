@@ -1,22 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const videosData = "/data/videos.json";
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+
+function readVideos() {
+  const videoData = fs.readFileSync("data/videos.json");
+
+  const parsedVideos = JSON.parse(videoData);
+
+  return parsedVideos;
+}
 
 // trying to get videos from json file
 router.get("/", (req, res) => {
-  const allVideos = videosData.map((video) => {
-    return {
-      title: video.title,
-      channel: video.channel,
-    };
-  });
-  res.json(allVideos);
-});
+  const parseData = readVideos();
 
-// router.get("/", (req, res, then) => {
-//   console.log("got it");
-//   res.send("did you get it?");
-//   then();
-// });
+  res.json(parseData);
+});
 
 module.exports = router;
