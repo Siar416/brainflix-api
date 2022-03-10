@@ -4,6 +4,14 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const videosRoute = require("./routes/videos");
+// const { PORT } = process.env;
+
+app.use(express.static("./public"));
+
+//cors
+app.use(cors());
+
+app.use(express.json());
 
 //using routing by define endpoint
 app.use("/videos", videosRoute);
@@ -11,8 +19,7 @@ app.use("/videos", videosRoute);
 //show morgan biolerplate
 app.use(morgan("tiny"));
 
-//port
-const SERVER_PORT = 8000;
+const SERVER_PORT = process.env.PORT || 8100;
 
 // app listening on port 8000
 app.listen(SERVER_PORT, () => {
