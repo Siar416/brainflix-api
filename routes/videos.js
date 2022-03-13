@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 
-// read from json
 function readVideos() {
   const videoData = fs.readFileSync("data/videos.json");
   const parsedVideos = JSON.parse(videoData);
@@ -15,14 +13,12 @@ function writeVideo(data) {
   fs.writeFileSync("./data/videos.json", stringifiedVideo);
 }
 
-// get all videos
 router.get("/", (req, res) => {
   const parseData = readVideos();
   console.log(res);
   res.json(parseData);
 });
 
-// need to get individual video by its id
 router.get("/:id", (req, res) => {
   const videoData = readVideos();
 
@@ -35,7 +31,6 @@ router.get("/:id", (req, res) => {
   res.json(individualVidoe);
 });
 
-// create/upload video
 router.post("/", (req, res) => {
   const parseData = readVideos();
   const { title, desc, id } = req.body;
@@ -44,33 +39,32 @@ router.post("/", (req, res) => {
     title,
     desc,
     id,
-    image: "http://localhost:8000/images/image0.jpeg",
-    channel: "no channel",
+    image: "http://localhost:8000/images/Upload-video-preview.jpg",
+    channel: "Siar Wahidi",
     views: "0",
     likes: "0",
-    duration: "1:00",
+    duration: "3:00",
     timestamp: new Date().toLocaleDateString(),
     comments: [
       {
-        name: "Micheal Lyons",
-        comment:
-          "They BLEW the ROOF off at their last event, once everyone started figuring out they were going. This is still simply the greatest opening of an event I have EVER witnessed.",
+        name: "John Doe",
+        comment: "This is such an amazing video, a must watch for all",
         likes: 0,
-        timestamp: 1628522461000,
+        timestamp: new Date().toLocaleDateString(),
       },
       {
-        name: "Gary Wong",
+        name: "Mary Jane",
         comment:
-          "Every time I see him shred I feel so motivated to get off my couch and hop on my board. He’s so talented! I wish I can ride like him one day so I can really enjoy myself!",
+          "I cant believe this guys recording his videos while riding his bike one million miles an hour",
         likes: 0,
-        timestamp: 1626359541000,
+        timestamp: new Date().toLocaleDateString(),
       },
       {
-        name: "Theodore Duncan",
+        name: "Google was my idea",
         comment:
-          "How can someone be so good!!! You can tell he lives for this and loves to do it every day. Every time I see him I feel instantly happy! He’s definitely my favorite ever!",
+          "This video was okay, become a travel pro in one lesson was way better IMO",
         likes: 0,
-        timestamp: 1626011132000,
+        timestamp: new Date().toLocaleDateString(),
       },
     ],
   };
