@@ -15,7 +15,6 @@ function writeVideo(data) {
 
 router.get("/", (req, res) => {
   const parseData = readVideos();
-  console.log(res);
   res.json(parseData);
 });
 
